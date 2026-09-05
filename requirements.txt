@@ -1,0 +1,8 @@
+flask
+requests
+PyYAML
+kubernetes
+jinja2
+pandas
+numpy
+pytest
