@@ -1,0 +1,13 @@
+infrastructureDefinition:
+  name: testinfranew
+  identifier: testinfranew
+  orgIdentifier: default
+  projectIdentifier: test
+  environmentRef: testinfra
+  deploymentType: Kubernetes
+  type: KubernetesDirect
+  spec:
+    connectorRef: account.resiliencekube
+    namespace: harness-chaos
+    releaseName: release-<+INFRA_KEY_SHORT_ID>
+  allowSimultaneousDeployments: false
