@@ -1,0 +1,8 @@
+environment:
+  name: testinfra
+  identifier: testinfra
+  description: ""
+  tags: {}
+  type: PreProduction
+  orgIdentifier: default
+  projectIdentifier: test
