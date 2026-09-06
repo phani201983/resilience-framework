@@ -1,0 +1,8 @@
+environment:
+  name: test
+  identifier: test
+  description: ""
+  tags: {}
+  type: PreProduction
+  orgIdentifier: default
+  projectIdentifier: ResilienceAssessment

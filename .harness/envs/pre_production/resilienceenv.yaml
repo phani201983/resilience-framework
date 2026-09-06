@@ -1,0 +1,4 @@
+environment:
+  name: resilienceenv
+  identifier: resilienceenv
+  type: PreProduction
