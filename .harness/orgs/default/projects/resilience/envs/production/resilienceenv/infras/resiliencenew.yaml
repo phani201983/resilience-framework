@@ -1,0 +1,13 @@
+infrastructureDefinition:
+  name: resiliencenew
+  identifier: resiliencenew
+  orgIdentifier: default
+  projectIdentifier: resilience
+  environmentRef: resilienceenv
+  deploymentType: Kubernetes
+  type: KubernetesDirect
+  spec:
+    connectorRef: account.resiliencekube
+    namespace: dev-ns
+    releaseName: release-<+INFRA_KEY_SHORT_ID>
+  allowSimultaneousDeployments: false

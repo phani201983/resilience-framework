@@ -1,0 +1,8 @@
+environment:
+  name: resilienceenv
+  identifier: resilienceenv
+  description: ""
+  tags: {}
+  type: PreProduction
+  orgIdentifier: default
+  projectIdentifier: resilience
