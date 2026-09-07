@@ -3,3 +3,6 @@ service:
   identifier: testservice
   orgIdentifier: default
   projectIdentifier: test
+  serviceDefinition:
+    spec: {}
+    type: Kubernetes
