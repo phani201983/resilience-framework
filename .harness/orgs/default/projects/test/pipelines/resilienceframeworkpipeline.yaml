@@ -39,6 +39,17 @@ pipeline:
                         branch: main
               - step:
                   type: Run
+                  name: Run_3
+                  identifier: Run_3
+                  spec:
+                    connectorRef: Docker_Hub_Connector
+                    image: python:3.11
+                    shell: Sh
+                    command: |-
+                      pwd
+                      ls -R
+              - step:
+                  type: Run
                   name: Prepare Environment
                   identifier: Prepare_Environment
                   spec:
@@ -71,7 +82,7 @@ pipeline:
             steps:
               - step:
                   type: ShellScript
-                  name: ShellScript_2
+                  name: assessment_score
                   identifier: ShellScript_2
                   spec:
                     shell: Bash
