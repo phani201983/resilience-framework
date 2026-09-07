@@ -6,6 +6,63 @@ pipeline:
   tags: {}
   stages:
     - stage:
+        name: testbuild
+        identifier: testbuild
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          caching:
+            enabled: true
+            override: true
+          buildIntelligence:
+            enabled: true
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: account.resiliencekube
+              namespace: resilience-demo
+              serviceAccountName: harness-sa
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
+          execution:
+            steps:
+              - step:
+                  type: GitClone
+                  name: GitClone_1
+                  identifier: GitClone_1
+                  spec:
+                    connectorRef: testgit
+                    build:
+                      type: branch
+                      spec:
+                        branch: main
+              - step:
+                  type: Run
+                  name: Prepare Environment
+                  identifier: Prepare_Environment
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: python:3.12
+                    shell: Sh
+                    command: |-
+                      echo "Source Code Downloaded"
+
+                      pwd
+                      ls -la
+
+                      python --version
+              - step:
+                  type: Run
+                  name: Run_2
+                  identifier: Run_2
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: python:3.11
+                    shell: Sh
+                    command: pip install -r requirements.txt
+    - stage:
         name: testdeploy
         identifier: testdeploy
         description: ""
@@ -129,3 +186,8 @@ pipeline:
                     outputVariables: []
                   timeout: 10m
         tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: testgit
+        build: <+input>
