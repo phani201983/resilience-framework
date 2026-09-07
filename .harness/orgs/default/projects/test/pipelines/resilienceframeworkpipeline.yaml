@@ -106,7 +106,7 @@ pipeline:
                     headers: []
                     inputVariables: []
                     outputVariables: []
-                  timeout: 10s
+                  timeout: 30m
         tags: {}
     - stage:
         name: testdeploy
