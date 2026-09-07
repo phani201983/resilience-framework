@@ -6,8 +6,8 @@ pipeline:
   tags: {}
   stages:
     - stage:
-        name: testbuild
-        identifier: testbuild
+        name: testbuilddeploy
+        identifier: testbuilddeploy
         description: ""
         type: CI
         spec:
@@ -22,7 +22,6 @@ pipeline:
             spec:
               connectorRef: account.resiliencekube
               namespace: resilience-demo
-              serviceAccountName: harness-sa
               automountServiceAccountToken: true
               nodeSelector: {}
               os: Linux
@@ -61,7 +60,20 @@ pipeline:
                     connectorRef: Docker_Hub_Connector
                     image: python:3.11
                     shell: Sh
-                    command: pip install -r requirements.txt
+                    command: |-
+                      pip install -r requirements.txt
+
+                      echo "Reading application.yaml"
+
+                      cat architecture/application.yaml
+
+                      echo "Executing Resilience Assessment"
+
+                      python3 scripts/resilience_check.py
+
+                      python3 scripts/policy_check.py
+
+                      echo "cat reports/result.json"
     - stage:
         name: Assessment
         identifier: Assessment
@@ -72,30 +84,7 @@ pipeline:
             steps:
               - step:
                   type: ShellScript
-                  name: Resilience Assessment
-                  identifier: Resilience_Assessment
-                  spec:
-                    shell: Bash
-                    executionTarget: {}
-                    source:
-                      type: Inline
-                      spec:
-                        script: |-
-                          echo "Reading application.yaml"
-
-                          cat architecture/application.yaml
-
-                          echo "Executing Resilience Assessment"
-
-                          python3 scripts/resilience_check.py
-
-                          cat result.json
-                    environmentVariables: []
-                    outputVariables: []
-                  timeout: 10m
-              - step:
-                  type: ShellScript
-                  name: ShellScript_2
+                  name: assessment_score
                   identifier: ShellScript_2
                   spec:
                     shell: Bash
