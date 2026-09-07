@@ -46,8 +46,14 @@ pipeline:
                     image: python:3.11
                     shell: Sh
                     command: |-
+                      cd /harness
+
                       pwd
-                      ls -R
+
+                      ls architecture
+                      ls scripts
+
+                      cat architecture/application.yaml
               - step:
                   type: Run
                   name: Prepare Environment
