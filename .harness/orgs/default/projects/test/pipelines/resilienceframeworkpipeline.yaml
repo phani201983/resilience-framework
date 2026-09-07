@@ -63,6 +63,52 @@ pipeline:
                     shell: Sh
                     command: pip install -r requirements.txt
     - stage:
+        name: Assessment
+        identifier: Assessment
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: ShellScript
+                  name: Resilience Assessment
+                  identifier: Resilience_Assessment
+                  spec:
+                    shell: Bash
+                    executionTarget: {}
+                    source:
+                      type: Inline
+                      spec:
+                        script: |-
+                          echo "Running Resilience Assessment"
+
+                          score=95
+
+                          echo "Score: $score"
+
+                          if [ $score -lt 90 ]; then
+                            echo "Assessment Failed"
+                            exit 1
+                          fi
+
+                          echo "Assessment Passed"
+                    environmentVariables: []
+                    outputVariables: []
+                  timeout: 10m
+              - step:
+                  type: Http
+                  name: Http_1
+                  identifier: Http_1
+                  spec:
+                    url: http://sample-app.resilience-demo.svc.cluster.local:5000/health
+                    method: GET
+                    headers: []
+                    inputVariables: []
+                    outputVariables: []
+                  timeout: 10s
+        tags: {}
+    - stage:
         name: testdeploy
         identifier: testdeploy
         description: ""
