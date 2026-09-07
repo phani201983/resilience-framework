@@ -6,6 +6,109 @@ pipeline:
   tags: {}
   stages:
     - stage:
+        name: testbuild
+        identifier: testbuild
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          caching:
+            enabled: true
+            override: true
+          buildIntelligence:
+            enabled: true
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: account.resiliencekube
+              namespace: resilience-demo
+              serviceAccountName: harness-sa
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
+          execution:
+            steps:
+              - step:
+                  type: GitClone
+                  name: GitClone_1
+                  identifier: GitClone_1
+                  spec:
+                    connectorRef: testgit
+                    build:
+                      type: branch
+                      spec:
+                        branch: main
+              - step:
+                  type: Run
+                  name: Prepare Environment
+                  identifier: Prepare_Environment
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: python:3.11
+                    shell: Sh
+                    command: |-
+                      echo "Source Code Downloaded"
+
+                      pwd
+                      ls -la
+
+                      python --version
+              - step:
+                  type: Run
+                  name: Run_2
+                  identifier: Run_2
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: python:3.11
+                    shell: Sh
+                    command: pip install -r requirements.txt
+    - stage:
+        name: Assessment
+        identifier: Assessment
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: ShellScript
+                  name: Resilience Assessment
+                  identifier: Resilience_Assessment
+                  spec:
+                    shell: Bash
+                    executionTarget: {}
+                    source:
+                      type: Inline
+                      spec:
+                        script: |-
+                          echo "Running Resilience Assessment"
+
+                          score=95
+
+                          echo "Score: $score"
+
+                          if [ $score -lt 90 ]; then
+                            echo "Assessment Failed"
+                            exit 1
+                          fi
+
+                          echo "Assessment Passed"
+                    environmentVariables: []
+                    outputVariables: []
+                  timeout: 10m
+              - step:
+                  type: Http
+                  name: Http_1
+                  identifier: Http_1
+                  spec:
+                    url: http://sample-app.resilience-demo.svc.cluster.local:5000/health
+                    method: GET
+                    headers: []
+                    inputVariables: []
+                    outputVariables: []
+                  timeout: 10s
+        tags: {}
+    - stage:
         name: testdeploy
         identifier: testdeploy
         description: ""
@@ -129,3 +232,8 @@ pipeline:
                     outputVariables: []
                   timeout: 10m
         tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: testgit
+        build: <+input>
