@@ -81,6 +81,10 @@ pipeline:
                       type: Inline
                       spec:
                         script: |-
+                          pwd
+                          find . -name "*.yaml"
+                          ls -R
+
                           echo "Reading application.yaml"
 
                           cat architecture/application.yaml
