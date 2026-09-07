@@ -1,19 +1,35 @@
-# architecture/application.yaml
-
 application:
   name: sample-app
 
 services:
+
   - name: frontend
     replicas: 2
     healthCheck: true
     resources: true
+    autoscaling: true
+    pdbEnabled: true
+    chaosTested: true
+    tlsEnabled: true
+    monitoring: true
+    logging: true
+    tracing: true
 
   - name: backend
     replicas: 2
     healthCheck: true
     resources: true
+    autoscaling: true
+    pdbEnabled: true
+    chaosTested: true
+    tlsEnabled: true
+    monitoring: true
+    logging: true
+    tracing: true
 
   - name: database
-    replicas: 1
+    replicas: 2
     backupEnabled: true
+    resources: true
+    monitoring: true
+    logging: true
