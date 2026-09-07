@@ -44,7 +44,7 @@ pipeline:
                   identifier: Prepare_Environment
                   spec:
                     connectorRef: account.harnessImage
-                    image: python:3.11
+                    image: docker.io/library/python:3.11
                     shell: Sh
                     command: |-
                       echo "Source Code Downloaded"
@@ -59,7 +59,7 @@ pipeline:
                   identifier: Run_2
                   spec:
                     connectorRef: account.harnessImage
-                    image: python:3.11
+                    image: docker.io/library/python:3.11
                     shell: Sh
                     command: pip install -r requirements.txt
     - stage:
