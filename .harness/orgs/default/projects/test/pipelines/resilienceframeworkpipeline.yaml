@@ -6,6 +6,62 @@ pipeline:
   tags: {}
   stages:
     - stage:
+        name: testbuilddeploy
+        identifier: testbuilddeploy
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          caching:
+            enabled: true
+            override: true
+          buildIntelligence:
+            enabled: true
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: account.resiliencekube
+              namespace: resilience-demo
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
+          execution:
+            steps:
+              - step:
+                  type: GitClone
+                  name: GitClone_1
+                  identifier: GitClone_1
+                  spec:
+                    connectorRef: testgit
+                    build:
+                      type: branch
+                      spec:
+                        branch: main
+              - step:
+                  type: Run
+                  name: Prepare Environment
+                  identifier: Prepare_Environment
+                  spec:
+                    connectorRef: Docker_Hub_Connector
+                    image: python:3.11
+                    shell: Sh
+                    command: |-
+                      echo "Source Code Downloaded"
+
+                      pwd
+                      ls -la
+
+                      python --version
+              - step:
+                  type: Run
+                  name: Run_2
+                  identifier: Run_2
+                  spec:
+                    connectorRef: Docker_Hub_Connector
+                    image: python:3.11
+                    shell: Sh
+                    command: pip install -r requirements.txt
+    - stage:
         name: testbuild
         identifier: testbuild
         description: ""
