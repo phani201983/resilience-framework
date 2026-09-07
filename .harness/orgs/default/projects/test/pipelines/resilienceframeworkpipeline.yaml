@@ -44,3 +44,19 @@ pipeline:
                 - AllErrors
               action:
                 type: StageRollback
+    - stage:
+        name: testpoddelet
+        identifier: testpoddelet
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: Chaos
+                  name: Chaos_1
+                  identifier: Chaos_1
+                  spec:
+                    experimentRef: 63d92c6a-8506-4568-b1e7-df89e97c4274
+                    expectedResilienceScore: 50
+        tags: {}
