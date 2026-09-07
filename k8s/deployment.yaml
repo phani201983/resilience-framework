@@ -19,9 +19,9 @@ spec:
       containers:
       - name: sample-app
 
-        image: sample-app:latest
+        image: phani201983/sample-app:1.0
 
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
 
         ports:
         - containerPort: 5000
