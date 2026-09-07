@@ -4,5 +4,20 @@ service:
   orgIdentifier: default
   projectIdentifier: test
   serviceDefinition:
-    spec: {}
+    spec:
+      manifests:
+        - manifest:
+            identifier: testmanifest
+            type: K8sManifest
+            spec:
+              store:
+                type: Github
+                spec:
+                  connectorRef: testgit
+                  gitFetchType: Branch
+                  paths:
+                    - k8s
+                  branch: main
+              skipResourceVersioning: false
+              enableDeclarativeRollback: false
     type: Kubernetes
