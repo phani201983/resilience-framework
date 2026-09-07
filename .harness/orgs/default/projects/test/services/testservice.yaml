@@ -7,7 +7,7 @@ service:
     spec:
       manifests:
         - manifest:
-            identifier: testmanifest
+            identifier: testmani
             type: K8sManifest
             spec:
               store:
@@ -16,7 +16,7 @@ service:
                   connectorRef: testgit
                   gitFetchType: Branch
                   paths:
-                    - k8s
+                    - k8s/
                   branch: main
               skipResourceVersioning: false
               enableDeclarativeRollback: false
