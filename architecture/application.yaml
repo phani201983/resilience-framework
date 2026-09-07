@@ -1,0 +1,19 @@
+# architecture/application.yaml
+
+application:
+  name: sample-app
+
+services:
+  - name: frontend
+    replicas: 2
+    healthCheck: true
+    resources: true
+
+  - name: backend
+    replicas: 2
+    healthCheck: true
+    resources: true
+
+  - name: database
+    replicas: 1
+    backupEnabled: true
