@@ -1,0 +1,46 @@
+pipeline:
+  name: resilience-framework-pipeline
+  identifier: resilienceframeworkpipeline
+  projectIdentifier: test
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: testdeploy
+        identifier: testdeploy
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: Kubernetes
+          service:
+            serviceRef: testservice
+          environment:
+            environmentRef: testinfra
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: testinfranew
+          execution:
+            steps:
+              - step:
+                  name: Rollout Deployment
+                  identifier: rolloutDeployment
+                  type: K8sRollingDeploy
+                  timeout: 10m
+                  spec:
+                    skipDryRun: false
+                    pruningEnabled: false
+            rollbackSteps:
+              - step:
+                  name: Rollback Rollout Deployment
+                  identifier: rollbackRolloutDeployment
+                  type: K8sRollingRollback
+                  timeout: 10m
+                  spec:
+                    pruningEnabled: false
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
