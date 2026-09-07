@@ -71,7 +71,7 @@ pipeline:
 
                       python3 scripts/resilience_check.py
 
-                      cat result.json
+                      cat reports/result.json
               - step:
                   type: Run
                   name: Assessment
