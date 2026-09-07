@@ -81,18 +81,15 @@ pipeline:
                       type: Inline
                       spec:
                         script: |-
-                          echo "Running Resilience Assessment"
+                          echo "Reading application.yaml"
 
-                          score=95
+                          cat architecture/application.yaml
 
-                          echo "Score: $score"
+                          echo "Executing Resilience Assessment"
 
-                          if [ $score -lt 90 ]; then
-                            echo "Assessment Failed"
-                            exit 1
-                          fi
+                          python3 scripts/resilience_check.py
 
-                          echo "Assessment Passed"
+                          cat result.json
                     environmentVariables: []
                     outputVariables: []
                   timeout: 10m
