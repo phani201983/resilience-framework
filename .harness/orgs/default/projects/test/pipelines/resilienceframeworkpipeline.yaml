@@ -39,23 +39,6 @@ pipeline:
                         branch: main
               - step:
                   type: Run
-                  name: Run_3
-                  identifier: Run_3
-                  spec:
-                    connectorRef: Docker_Hub_Connector
-                    image: python:3.11
-                    shell: Sh
-                    command: |-
-                      cd /harness
-
-                      pwd
-
-                      ls architecture
-                      ls scripts
-
-                      cat architecture/application.yaml
-              - step:
-                  type: Run
                   name: Prepare Environment
                   identifier: Prepare_Environment
                   spec:
@@ -78,6 +61,24 @@ pipeline:
                     image: python:3.11
                     shell: Sh
                     command: pip install -r requirements.txt
+              - step:
+                  type: Run
+                  name: Assessment
+                  identifier: Assessment
+                  spec:
+                    connectorRef: Docker_Hub_Connector
+                    image: python:3.11
+                    shell: Sh
+                    command: |-
+                      echo "Reading application.yaml"
+
+                      cat architecture/application.yaml
+
+                      echo "Executing Resilience Assessment"
+
+                      python3 scripts/resilience_check.py
+
+                      cat result.json
     - stage:
         name: Assessment
         identifier: Assessment
