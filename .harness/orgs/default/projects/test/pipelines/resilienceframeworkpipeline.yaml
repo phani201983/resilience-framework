@@ -43,7 +43,7 @@ pipeline:
                   name: Prepare Environment
                   identifier: Prepare_Environment
                   spec:
-                    connectorRef: account.harnessImage
+                    connectorRef: Docker_Hub_Connector
                     image: python:3.11
                     shell: Sh
                     command: |-
@@ -58,7 +58,7 @@ pipeline:
                   name: Run_2
                   identifier: Run_2
                   spec:
-                    connectorRef: account.harnessImage
+                    connectorRef: Docker_Hub_Connector
                     image: python:3.11
                     shell: Sh
                     command: pip install -r requirements.txt
