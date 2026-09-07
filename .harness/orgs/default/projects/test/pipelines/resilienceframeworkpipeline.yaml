@@ -44,7 +44,7 @@ pipeline:
                   identifier: Prepare_Environment
                   spec:
                     connectorRef: account.harnessImage
-                    image: python:3.12
+                    image: python:3.11
                     shell: Sh
                     command: |-
                       echo "Source Code Downloaded"
