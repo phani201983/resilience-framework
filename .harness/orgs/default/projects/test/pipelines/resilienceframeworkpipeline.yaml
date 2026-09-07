@@ -60,16 +60,9 @@ pipeline:
                     connectorRef: Docker_Hub_Connector
                     image: python:3.11
                     shell: Sh
-                    command: pip install -r requirements.txt
-              - step:
-                  type: Run
-                  name: Assessment
-                  identifier: Assessment
-                  spec:
-                    connectorRef: Docker_Hub_Connector
-                    image: python:3.11
-                    shell: Sh
                     command: |-
+                      pip install -r requirements.txt
+
                       echo "Reading application.yaml"
 
                       cat architecture/application.yaml
@@ -79,6 +72,15 @@ pipeline:
                       python3 scripts/resilience_check.py
 
                       cat result.json
+              - step:
+                  type: Run
+                  name: Assessment
+                  identifier: Assessment
+                  spec:
+                    connectorRef: Docker_Hub_Connector
+                    image: python:3.11
+                    shell: Sh
+                    command: echo "testing"
     - stage:
         name: Assessment
         identifier: Assessment
