@@ -80,19 +80,60 @@ pipeline:
                       type: Inline
                       spec:
                         script: |-
-                          pwd
-                          find . -name "*.yaml"
-                          ls -R
+                          mkdir -p architecture
 
-                          echo "Reading application.yaml"
+                          cat > architecture/application.yaml <<EOF
+                          application:
+                            name: sample-app
+
+                          services:
+                            - name: frontend
+                              replicas: 2
+                              healthCheck: true
+                              resources: true
+
+                            - name: backend
+                              replicas: 2
+                              healthCheck: true
+                              resources: true
+
+                            - name: database
+                              replicas: 1
+                              backupEnabled: true
+                          EOF
 
                           cat architecture/application.yaml
 
-                          echo "Executing Resilience Assessment"
+                          # scripts/resilience_check.py
 
-                          python3 scripts/resilience_check.py
+                          import yaml
+                          import json
 
-                          cat result.json
+                          score = 100
+
+                          with open("architecture/application.yaml") as f:
+                              data = yaml.safe_load(f)
+
+                          for service in data["services"]:
+
+                              if service.get("replicas", 1) < 2:
+                                  score -= 20
+
+                              if not service.get("healthCheck", False):
+                                  score -= 10
+
+                              if not service.get("resources", False):
+                                  score -= 10
+
+                          result = {
+                              "application": data["application"]["name"],
+                              "score": score
+                          }
+
+                          with open("reports/result.json","w") as f:
+                              json.dump(result,f)
+
+                          print(result)
                     environmentVariables: []
                     outputVariables: []
                   timeout: 10m
