@@ -21,7 +21,7 @@ spec:
 
         image: phani201983/sample-app:1.0
 
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
 
         ports:
         - containerPort: 5000
