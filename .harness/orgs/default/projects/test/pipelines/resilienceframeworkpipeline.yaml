@@ -81,8 +81,9 @@ pipeline:
                       spec:
                         script: |-
                           mkdir -p architecture
+                          mkdir -p scripts
 
-                          cat > architecture/application.yaml <<EOF
+                          cat > architecture/application.yaml << 'EOF'
                           application:
                             name: sample-app
 
@@ -103,6 +104,8 @@ pipeline:
                           EOF
 
                           cat architecture/application.yaml
+
+                          cat > scripts/resilience_check.py <<'EOF'
 
                           # scripts/resilience_check.py
 
@@ -134,6 +137,9 @@ pipeline:
                               json.dump(result,f)
 
                           print(result)
+
+                          EOF
+                          python scripts/resilience_check.py
                     environmentVariables: []
                     outputVariables: []
                   timeout: 10m
