@@ -20,7 +20,7 @@ if actual_score < required_score:
     print("FAIL - Deployment Blocked")
     subprocess.run([
         "python",
-        "scripts/send_email.py",
+        "send_email.py",
         str(actual_score),
         "FAIL"
     ])
