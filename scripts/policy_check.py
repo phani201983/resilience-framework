@@ -20,7 +20,7 @@ print(f"Actual Score   : {actual_score}")
 if actual_score < required_score:
     print("FAIL - Deployment Blocked")
     print("Current Directory:", os.getcwd())
-    print("Scripts Folder:", os.listdir("scripts"))
+    print("Scripts Folder:", os.listdir("reports"))
     subprocess.run([
         "python",
         "scripts/send_mail.py",
