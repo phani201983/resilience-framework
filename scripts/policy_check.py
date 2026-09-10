@@ -1,3 +1,4 @@
+import os
 import subprocess
 import yaml
 import json
@@ -18,6 +19,8 @@ print(f"Actual Score   : {actual_score}")
 
 if actual_score < required_score:
     print("FAIL - Deployment Blocked")
+    print("Current Directory:", os.getcwd())
+    print("Scripts Folder:", os.listdir("scripts"))
     subprocess.run([
         "python",
         "send_email.py",
