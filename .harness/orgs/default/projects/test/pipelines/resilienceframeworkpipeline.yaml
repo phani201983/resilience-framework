@@ -71,6 +71,8 @@ pipeline:
 
                       python3 scripts/resilience_check.py
 
+                      python3 scripts/report_generator.py
+
                       python3 scripts/policy_check.py
 
                       echo "cat reports/result.json"
