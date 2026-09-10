@@ -14,6 +14,7 @@ services:
     monitoring: true
     logging: true
     tracing: true
+    circuitBreaker: true
 
   - name: backend
     replicas: 2
@@ -26,6 +27,7 @@ services:
     monitoring: true
     logging: true
     tracing: true
+    circuitBreaker: true
 
   - name: database
     replicas: 2

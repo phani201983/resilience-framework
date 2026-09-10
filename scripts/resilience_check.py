@@ -86,6 +86,13 @@ for service in app_data["services"]:
             f"{service['name']}: tracing missing"
         )
 
+    # Circuit Breaker
+    if not service.get("circuitBreaker", False):
+        score -= policy_data["policies"]["circuit_breaker"]["weight"]
+        violations.append(
+            f"{service['name']}: circuit breaker not configured"
+        )
+
     # Database Backup
     if service["name"] == "database":
         if not service.get("backupEnabled", False):
@@ -94,9 +101,25 @@ for service in app_data["services"]:
                 "database: backup not enabled"
             )
 
-# Prevent negative scores
-if score < 0:
-    score = 0
+    # Retry Policy
+    if not service.get("retryPolicy", False):
+        score -= 5
+
+    # Bulkhead
+    if not service.get("bulkhead", False):
+        score -= 10
+
+    # Timeout Policy    
+    if not service.get("timeoutPolicy", False):
+        score -= 5
+
+    # Rate Limiting
+    if not service.get("rateLimiting", False):
+        score -= 5
+
+    # Prevent negative scores
+    if score < 0:
+        score = 0
 
 # Determine status
 passing_score = policy_data["scoring"]["passing_score"]

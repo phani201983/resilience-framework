@@ -77,6 +77,47 @@ policies:
     weight: 5
     required: true
 
+  # Circuit Breaker
+  circuit_breaker:
+    enabled: true
+    weight: 10
+    required: true
+
+  #Resilience Patterns
+  retry_policy:
+    enabled: true
+    weight: 5
+
+  #Bulkhead Isolation
+  bulkhead:
+    enabled: true
+    weight: 10
+
+  #Timeout Policy
+  timeout_policy:
+    enabled: true
+    weight: 5
+
+  #Rate Limiting
+  rate_limiting:
+    enabled: true
+    weight: 5
+
+  #Dead Letter Queue
+  dead_letter_queue:
+    enabled: true
+    weight: 10
+
+  #Service Mesh
+  service_mesh:
+    enabled: true
+    weight: 10
+
+  #API Gateway
+  api_gateway:
+    enabled: true
+    weight: 5
+
 evaluation:
 
   pass:
