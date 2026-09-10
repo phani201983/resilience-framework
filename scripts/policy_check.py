@@ -23,7 +23,7 @@ if actual_score < required_score:
     print("Scripts Folder:", os.listdir("scripts"))
     subprocess.run([
         "python",
-        "send_email.py",
+        "scripts/send_mail.py",
         str(actual_score),
         "FAIL"
     ])
