@@ -6,10 +6,10 @@ from pathlib import Path
 score = sys.argv[1]
 status = sys.argv[2]
 
-sender = "yourgmail@gmail.com"
-app_password = "your_gmail_app_password"
+sender = "phani201983@gmail.com"
+app_password = "ahos fzqt etgi botj"
 
-receiver = "recipient@gmail.com"
+receiver = "lsailu143@outlook.com"
 
 msg = EmailMessage()
 
