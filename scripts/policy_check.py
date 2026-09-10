@@ -1,3 +1,4 @@
+import subprocess
 import yaml
 import json
 import sys
@@ -16,7 +17,14 @@ print(f"Required Score : {required_score}")
 print(f"Actual Score   : {actual_score}")
 
 if actual_score < required_score:
-    print("FAILED: Deployment Blocked")
+    print("FAIL - Deployment Blocked")
+    subprocess.run([
+        "python",
+        "scripts/send_email.py",
+        str(actual_score),
+        "FAIL"
+    ])
+    
     sys.exit(1)
 
 print("PASSED: Deployment Approved")
