@@ -27,6 +27,11 @@ if actual_score < required_score:
         str(actual_score),
         "FAIL"
     ])
+
+    subprocess.run([
+        "python", "create_jira_bug.py"],
+        check=True
+    )
     
     sys.exit(1)
 
