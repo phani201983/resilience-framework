@@ -12,7 +12,7 @@ JIRA_API_TOKEN="ATATT3xFfGF0syJcaIoGS0QX7dXcefABsPAuLF1345eB2o6p_ms2HjsZoo9AsN6_
 payload = {
     "fields": {
         "project": {
-            "key": "RES"
+            "key": "SCRUM"
         },
         "summary": "Harness Resilience Assessment Failed",
         "issuetype": {
