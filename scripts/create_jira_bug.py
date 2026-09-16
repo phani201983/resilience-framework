@@ -16,7 +16,7 @@ payload = {
         },
         "summary": "Harness Resilience Assessment Failed",
         "issuetype": {
-            "name": "Bug"
+            "name": "Task"
         }
     }
 }
