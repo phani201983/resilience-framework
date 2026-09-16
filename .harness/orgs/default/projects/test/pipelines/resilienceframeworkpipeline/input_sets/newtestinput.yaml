@@ -1,0 +1,14 @@
+inputSet:
+  name: newtestinput
+  identifier: newtestinput
+  orgIdentifier: default
+  projectIdentifier: test
+  pipeline:
+    identifier: resilienceframeworkpipeline
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: main
