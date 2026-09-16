@@ -29,7 +29,7 @@ if actual_score < required_score:
     ])
 
     subprocess.run([
-        "python", "create_jira_bug.py"],
+        "python", "scripts/create_jira_bug.py"],
         check=True
     )
     
