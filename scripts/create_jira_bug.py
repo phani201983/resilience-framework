@@ -2,10 +2,13 @@ import os
 import json
 import requests
 
-JIRA_URL = os.environ["JIRA_URL"]
-JIRA_EMAIL = os.environ["JIRA_EMAIL"]
-JIRA_API_TOKEN = os.environ["JIRA_API_TOKEN"]
+# JIRA_URL = os.environ["JIRA_URL"]
+# JIRA_EMAIL = os.environ["JIRA_EMAIL"]
+# JIRA_API_TOKEN = os.environ["JIRA_API_TOKEN"]
 
+JIRA_URL="https://phani201983.atlassian.net/"
+JIRA_EMAIL="phani201983@gmail.com"
+JIRA_API_TOKEN="ATATT3xFfGF0syJcaIoGS0QX7dXcefABsPAuLF1345eB2o6p_ms2HjsZoo9AsN6_4jQk6maZ7FekGFGVA23cF54-msQhY1kyo3YUlus_0seeBqCAR2CuZ876wLtzP_2mCBaWjc91pai0Rpr5Yo7chxhwH33pxv_62kqYBc6S4TuKpYKz2bHwSN0=CF0FA430"
 payload = {
     "fields": {
         "project": {
