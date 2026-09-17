@@ -38,7 +38,7 @@ policies:
   # Autoscaling
   autoscaling:
     enabled: true
-    weight: 10
+    weight: 1
     required: true
 
   # Pod Disruption Budget
@@ -86,32 +86,32 @@ policies:
   #Resilience Patterns
   retry_policy:
     enabled: true
-    weight: 5
+    weight: 1
 
   #Bulkhead Isolation
   bulkhead:
     enabled: true
-    weight: 10
+    weight: 1
 
   #Timeout Policy
   timeout_policy:
     enabled: true
-    weight: 5
+    weight: 1
 
   #Rate Limiting
   rate_limiting:
     enabled: true
-    weight: 5
+    weight: 1
 
   #Dead Letter Queue
   dead_letter_queue:
     enabled: true
-    weight: 10
+    weight: 1
 
   #Service Mesh
   service_mesh:
     enabled: true
-    weight: 10
+    weight: 1
 
   #API Gateway
   api_gateway:
