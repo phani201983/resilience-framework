@@ -66,68 +66,68 @@ policies:
     required: true
 
   # Logging
-#   logging:
-#     enabled: true
-#     weight: 5
-#     required: true
+  logging:
+    enabled: true
+    weight: 5
+    required: true
 
-#   # Distributed Tracing
-#   tracing:
-#     enabled: true
-#     weight: 5
-#     required: true
+  # Distributed Tracing
+  tracing:
+    enabled: true
+    weight: 5
+    required: true
 
-#   # Circuit Breaker
-#   circuit_breaker:
-#     enabled: true
-#     weight: 10
-#     required: true
+  # Circuit Breaker
+  circuit_breaker:
+    enabled: true
+    weight: 10
+    required: true
 
-#   #Resilience Patterns
-#   retry_policy:
-#     enabled: true
-#     weight: 1
+  #Resilience Patterns
+  retry_policy:
+    enabled: true
+    weight: 1
 
-#   #Bulkhead Isolation
-#   bulkhead:
-#     enabled: true
-#     weight: 1
+  #Bulkhead Isolation
+  bulkhead:
+    enabled: true
+    weight: 1
 
-#   #Timeout Policy
-#   timeout_policy:
-#     enabled: true
-#     weight: 1
+  #Timeout Policy
+  timeout_policy:
+    enabled: true
+    weight: 1
 
-#   #Rate Limiting
-#   rate_limiting:
-#     enabled: true
-#     weight: 1
+  #Rate Limiting
+  rate_limiting:
+    enabled: true
+    weight: 1
 
-#   #Dead Letter Queue
-#   dead_letter_queue:
-#     enabled: true
-#     weight: 1
+  #Dead Letter Queue
+  dead_letter_queue:
+    enabled: true
+    weight: 1
 
-#   #Service Mesh
-#   service_mesh:
-#     enabled: true
-#     weight: 1
+  #Service Mesh
+  service_mesh:
+    enabled: true
+    weight: 1
 
-#   #API Gateway
-#   api_gateway:
-#     enabled: true
-#     weight: 5
+  #API Gateway
+  api_gateway:
+    enabled: true
+    weight: 5
 
-# evaluation:
+evaluation:
 
-#   pass:
-#     minimum_score: 90
-#     action: DEPLOY
+  pass:
+    minimum_score: 90
+    action: DEPLOY
 
-#   warning:
-#     minimum_score: 70
-#     action: MANUAL_APPROVAL
+  warning:
+    minimum_score: 70
+    action: MANUAL_APPROVAL
 
-#   fail:
-#     minimum_score: 0
-#     action: BLOCK_DEPLOYMENT
+  fail:
+    minimum_score: 0
+    action: BLOCK_DEPLOYMENT
