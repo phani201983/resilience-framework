@@ -41,3 +41,4 @@ class MetricsCollector:
             time.sleep(1)
 
         return result
+    
